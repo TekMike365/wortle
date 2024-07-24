@@ -176,7 +176,7 @@ int main()
     printf("=== WORTLE ===\n");
     for (int r = 0; r < guesses; r++)
     {
-        println(r, word_len);
+        println(r + 1, word_len);
         printf(NEXT_LINE);
     }
     CURSOR_UP(guesses);
@@ -189,7 +189,7 @@ int main()
         while (1)
         {
             printf(ERASE_LINE);
-            println(i, word_len);
+            println(i + 1, word_len);
 
             fgets(guess, 1024, stdin);
             guess_len = strlen(guess);
@@ -221,7 +221,7 @@ int main()
         
         printf(PREV_LINE);
         printf(ERASE_LINE);
-        println(i, word_len);
+        println(i + 1, word_len);
 
         // check the word
         struct CH wchs[1024];
