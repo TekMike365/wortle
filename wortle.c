@@ -296,6 +296,7 @@ int main()
     }
 
     // out of guesses
+    printf(ERASE_LINE);
     printf("  *%s*\n", word);
 }
 
