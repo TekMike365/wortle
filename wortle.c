@@ -170,6 +170,8 @@ int main()
     for (int w = 0; w < word_len; w++)
         word[w] = toupper(word[w]);
 
+    //printf("debug: %s\n", word);
+
     int guesses = 5;
 
     // draw screen
@@ -278,6 +280,9 @@ int main()
             }
 
             // check remaining letters
+            if (printed)
+                continue;
+
             for (int w = 0; w < wchs_len; w++)
             {
                 if (guess[g] != wchs[w].c || wchs[w].n <= 0)
