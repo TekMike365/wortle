@@ -139,7 +139,7 @@ int main()
             sz++;
     if (sz <= 0)
     {
-        printf("file hes no words?\n");
+        printf("file has no words?\n");
         return 2;
     }
 
@@ -172,7 +172,7 @@ int main()
 
     //printf("debug: %s\n", word);
 
-    int guesses = 5;
+    int guesses = 6;
 
     // draw screen
     printf("=== WORTLE ===\n");
