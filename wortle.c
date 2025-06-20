@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define DICTIONARY "words.txt"
+#define DICTIONARY "words.txt\0"
 
 #define CORRECT "\x1b[1;32m"
 #define INCLUDED "\x1b[1;33m"
@@ -17,6 +17,9 @@
 #define CURSOR_DOWN(x) printf("\x1b[%dE", x)
 #define CURSOR_LEFT(x) printf("\x1b[%dD", x)
 #define CURSOR_RIGHT(x) printf("\x1b[%dC", x)
+
+// ugly global
+char dictpath[1024];
 
 void printch(const char* format, char c)
 {
@@ -91,7 +94,7 @@ void println(int n, int len)
 
 int indict(const char* str, int len)
 {
-    FILE* fp = fopen(DICTIONARY, "r");
+    FILE* fp = fopen(dictpath, "r");
     if (!fp)
     {
         printf("couldn't open wordlist\n");
@@ -122,11 +125,24 @@ int indict(const char* str, int len)
     return 0;
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    strncpy(dictpath, argv[0], 1024);
+
+    size_t dplen = strnlen(dictpath, 1024);
+    if (dplen == 1024)
+    {
+        printf("path to the executable is too big\n");
+        return -1;
+    }
+
+    // split = dictpath + dplen - len(wrotle)
+    char* split = dictpath + dplen - 6;
+    strncpy(split, DICTIONARY, 1024 - dplen - 5);
+
     srand(time(NULL));
 
-    FILE* fp = fopen(DICTIONARY, "r");
+    FILE* fp = fopen(dictpath, "r");
     if (!fp)
     {
         printf("couldn't open wordlist\n");
